@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres-db
+    environment:
+      POSTGRES_DB: mydatabase   # Name of the database
+      POSTGRES_USER: myuser     # Username
+      POSTGRES_PASSWORD: mypassword  # Password
+    volumes:
+      - postgres-data:/var/lib/postgresql/data   # Persistent volume for database data
+    ports:
+      - "5432:5432"  # Expose PostgreSQL port to host
+    networks:
+      - postgres-network
+
+volumes:
+  postgres-data:   # Named volume for data persistence
+
+networks:
+  postgres-network:  # Network for the PostgreSQL service
+    driver: bridge
